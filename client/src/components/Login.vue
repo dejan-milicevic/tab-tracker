@@ -1,30 +1,22 @@
 <template>
     <v-flex column>
         <v-flex xs6 offset-xs3>
-            <div class="white elevation-2">
-                <v-toolbar flat dense class="cyan" dark>
-                    <v-toolbar-title>Login</v-toolbar-title>
-                </v-toolbar>
-
-                <div class="px-4 py-2">
-                	<form name="tab-tracker-form" autocomplete="off">
-	                    <v-text-field
-	                        name="email"
-	                        label="E-mail"
-	                        v-model="email"
-	                        type="text"
-	                    ></v-text-field>
-	                    <v-text-field
-	                        name="password"
-	                        label="Password" 
-	                        v-model="password"
-	                        type="password"
-	                    ></v-text-field>
-	                </form>
-                    <div class="error" v-html="error"></div>
-                    <v-btn class="cyan" @click="login" dark>Login</v-btn>
-                </div>
-            </div>
+            <panel title="Login">
+                <v-text-field
+                    name="email"
+                    label="E-mail"
+                    v-model="email"
+                    type="text"
+                ></v-text-field>
+                <v-text-field
+                    name="password"
+                    label="Password" 
+                    v-model="password"
+                    type="password"
+                ></v-text-field>
+                <div class="danger-alert" v-html="error"></div>
+                <v-btn class="cyan" @click="login" dark>Login</v-btn>
+            </panel>
         </v-flex> 
     </v-flex>
 </template>
@@ -49,12 +41,13 @@ export default {
                 });
                 this.$store.dispatch('setToken', response.data.token);
                 this.$store.dispatch('setUser', response.data.user);
+                this.$router.push({name: 'songs'});
             } catch (error) {
                 this.error = error.response.data.error;
             }
         }
     }
-}
+};
 </script>
 
 <style scoped>
