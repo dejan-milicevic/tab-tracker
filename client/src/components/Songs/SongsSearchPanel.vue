@@ -1,3 +1,5 @@
+
+
 <template>
 	<panel title="Search">
 		<v-text-field
